@@ -1,72 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Data Lab</title>
+    <title>Profile Viewer</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	
-	<!-- Custom styles for this template -->
-    <link href="theme.css" rel="stylesheet">
-  </head>
-  <body>
-   <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Data Lab</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Labs<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="connecteddata/webvowl" target="_blank">Connected Data ontologie</a></li>
-				<li><a href="connecteddata/sgvizler" target="_blank">Connected Data visualisaties</a></li>
-				<li><a href="http://buildingbits.nl/apps/PNH" target="_blank">COINS Try-Out</a></li>
-              </ul>
-            </li>
-			<li class="button"><a href="blog">Blog</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+<body>
+    <h1>Profile viewer</h1>
+    <p id="login">
+        You are not logged in.
+        <button>Log in</button>
+    </p>
+    <p id="logout">
+        You are logged in as <span id="user"></span>.
+    </p>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/solid-auth-client.bundle.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
 
-    <div class="container theme-showcase" role="main">
-	
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Data Lab</h1>
-        <p>Deze site dient als showcase en Data Lab voor het Connected Data Innovatie project. Er kunnen geen rechten ontleend worden aan de informatie die op deze pagina's getoond wordt.</p>
-		<p>Sommige pagina's werken mogelijk beter in Chrome dan in Internet Explorer.</p>
-      </div>
-	  
-	   <div class="container">
-      <!-- Example row of columns -->
-
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Lodlive</h2>
-          <p>Lodlive visualisatie van een stukje begrippenkader voor de transitie naar de omgevingswet</p>
-          <p><a class="btn btn-default" href="connecteddata/lodlive/index.html" target="_blank" role="button">lodlive &raquo;</a></p>
-        </div>
-      </div>
-	  
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
 </html>
