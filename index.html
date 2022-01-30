@@ -1,36 +1,85 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Profile Viewer</title>
-  <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-  <h1>Profile viewer</h1>
-  <p id="login">
-    You are not logged in.
-    <button>Log in</button>
-  </p>
-  <p id="logout">
-    You are logged in as <span id="user"></span>.
-    <button>Log out</button>
-  </p>
-  <p>
-    <label for="profile">Profile:</label>
-    <input id="profile">
-    <button id="view">View</button>
-  </p>
-  <dl id="viewer">
-    <dt>Full name</dt>
-    <dd id="fullName"></dd>
-    <dt>Friends</dt>
-    <dd>
-      <ul id="friends"></ul>
-    </dd>
-  </dl>
-  <script src="scripts/jquery.js"></script>
-  <script src="scripts/solid-auth-client.bundle.js"></script>
-  <script src="scripts/rdflib.min.js"></script>
-  <script src="scripts/main.js"></script>
-</body>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
+	<link type="text/css" rel="stylesheet" href="css/apps.css" />
+	<title>Tikouka.nl</title>
+  </head>
+  <body class=tundra>
+	<header>
+		<h1>Tikouka.nl</h1>
+		<h2>
+	        Welkom op de webstek van Tikouka.nl
+    </h2>
+	</header>
+	<div id="contact-stub"> 
+      <span id="contact-text">Contact.</span> 
+    </div> 
+    <div id="contact"> 
+      Questions? Compliments? Complaints? Send here:  
+	  <a href="mailto:niels@tikouka.nl">niels@tikouka.nl</a>
+      <div id="hide">Close.</div> 
+    </div> 
+	<div id="wrapper"> 
+		<div id="app-wrapper"> 
+        	<div id="app-container"> 
+        		<div id="app-left"> 
+                <div class="chiclet-left"> 
+        		      <a target="_blank" href=""> 
+        			      <img src="images/tikouka.png" /> 
+        			    </a> 
+            			<div class="blurb"> 
+	                    <h3>Over Tikouka.nl</h3></br>
+							Tikouka is de Maori naam voor de Cabbage Tree 
+							(of <a target="_blank" href="http://en.wikipedia.org/wiki/Cordyline_australis">Cordyline australis</a>)</br>
+							De Cabbage Tree is een pionier en iconische soort uit Nieuw-Zeeland. In het verleden ook veel gebruikt als
+			 				voedsel en grondstof voor allerlei gebruiksvoorwerpen.
+            		  </div> 
+            		</div>  
+		</div> 
+        	<div id="app-right"> 
+                <div class="chiclet"> 
+        			    <a target="_blank" href="http://nl.linkedin.com/in/nielshoffmann"> 
+        			        <img src="images/cv.png" /> 
+        			    </a> 
+        			    <div class="blurb"> 
+            			  <h3>CV - LinkedIn</h3></br>
+				
+                		</div> 
+            		</div> 
+		<div class="chiclet"> 
+        			    <a target="_blank" href=""> 
+        			        <img src="images/test.jpg" /> 
+        			    </a> 
+        			    <div class="blurb"> 
+            			    <h3>Testing 1..2..3..</h3></br>
+					
+                		</div> 
+            </div> 
+			<div id="app-container"> 
+				<div class="chiclet">
+					Links:
+					<ul><a href="https://connecteddata.nl">connecteddata.nl</a></ul>	
+					<ul><a href="https://nielshoffmann.github.io/kanoroutes">kanoroutes</a></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> 
+  <script> 
+    $(document).ready(function() {
+      $('#contact-stub').click(function() {
+        $('#contact').animate({
+          'left': '+=230'
+        }, 1000);
+      });
+      $('#hide').click(function() {
+        $('#contact').animate({
+          'left': '-=230'
+        }, 1000);
+      });
+    });
+  </script> 
+  </body>
 </html>

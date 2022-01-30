@@ -1,0 +1,181 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+
+/* end meyer reset, unused stuff removed */
+
+body {
+    background-color: #2a323a;
+    background-attachment: fixed;
+    background-image: url('/images/lb.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+h1, a {
+    color: #fff;
+}
+
+header {
+  margin: 0 0 10px 0;
+  padding: 0;
+  height: 120px;
+  width: 100%;
+  background-color: #000;
+  -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+header h1 {
+  font-family: 'Oswald', arial, serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+  padding: 10px 0 0 10px;
+  color: #fff;
+}
+
+header h2 {
+  font-family: 'Oswald', arial, serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0;
+  padding: 10px 0 0 10px;
+  color: #fff;
+}
+
+#contact-stub {
+	color: #fff;
+	border: none;
+	writing-mode: tb-rl;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	white-space: nowrap;
+	display: block;
+  position: fixed;
+  left: -45px;
+  top: 180px;
+	width: 110px;
+	height: 20px;
+	font-family: Rockwell, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+  font-size: 1.2em;
+	text-shadow: 0px 0px 1px #333;
+  padding: 5px;
+  background-color: #20262d;
+}
+
+#contact-stub:hover {
+  background-color: #000;
+  cursor: pointer;
+}
+
+#contact {
+  position: absolute;
+  top: 135px;
+  left: -230px;
+  width: 210px;
+  height: 170px;
+  background-color: #20262d;
+  color: #fff;
+	font-family: Rockwell, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+  padding: 5px;
+  line-height: 1.2em;
+  position: fixed;
+}
+
+#contact:hover {
+  background-color: #000;
+}
+
+#hide {
+  cursor: pointer;
+  margin: 40px 0 0 0;
+}
+
+#about_text, #map-caption {
+    color: #fff;
+    padding: 0 0 30px 0;
+}
+
+#about_text a {
+    text-decoration: none;
+    border-bottom: 1px dotted #fff;
+}
+
+#about_text a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+}
+
+#wrapper {
+    background-color: transparent;
+    font-family: Rockwell, Verdana, Helvetica, sans-serif;
+    margin: 0 auto;
+    padding: 10px;
+    width: 960px;
+}
+
+#formWrapper {
+    margin: 0 auto;
+    width: 500px;
+}
+
+#comments {
+    color: #fff;
+}
+
+#comments blockquote {
+  padding: 5px 0 5px 10px;
+}
+
+#links { 
+    color: #fff;
+    text-align: center;
+    padding: 0 0 10px;
+}
+
+#map {
+    clear: both;
+}
+
+#hello-dedicated-reader {
+    color: #fff;
+    padding: 10px 0;
+}
