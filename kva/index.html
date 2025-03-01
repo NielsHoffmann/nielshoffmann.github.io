@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ /* set the CSS */
+
+ .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 2px;
+    /* default width is 2, radius is in code */
+  }
+
+  .node text {
+    font: 12px sans-serif;
+  }
+
+  .node--internal text {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+  }
+
+  /* node to node line */
+  .link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.2;
+    stroke-width: 2px;
+  }
+</style>
+
+<body>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-8  col-sm-12" id="index">
+      
+    </div>
+    <div class="col-lg-4 col-md-4  col-sm-12">
+<h1>Info:</h1>   
+  <p>
+    Eten blabla...
+  </p>
+</div>
+  </div>
+</div>
+
+<!-- 
+  <div>
+    <div id="index"></div>
+    <div id="content"></div>
+  </div> -->
+  
+
+  <!-- load the d3.js library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <!-- <script src="./questionnaire-v1.0.js"></script> -->
+<script src="./kva.js"></script>
+
+  <script>
+
+    // flare = d3.json("./kva.json")
+    // flare = { "name": "Top Level", "children": [{ "name": "Level 2: A", "children": [{ "name": "Son of A" }, { "name": "Daughter of A" }] }, { "name": "Level 2: B" }] }
+    flare = mydata;
+    
+    margin = ({top: 40, right: 200, bottom: 10, left: 80}); // how far you want the figure to be from each side, right:200 means your last dot will be 200 left from right side, so your text can display
+    width = 1600; // width of figure on the page
+    dy = width / 5; // horizontal distance between nodes, ideally width divided by level of hierarchy
+    dx = 50; // vertical height of each node, default 10
+    tree = d3.tree().nodeSize([dx, dy]); // initializes tree and sets node-size
+    diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+
+    const root = d3.hierarchy(flare);
+
+    root.x0 = dy / 2;
+    root.y0 = 0;
+    root.descendants().forEach((d, i) => {
+      d.id = i;
+      d._children = d.children;
+      if (d.depth && d.data.name.length !== 7) d.children = null;
+    });
+
+    const svg = d3.create("svg")
+      .attr("viewBox", [-margin.left, -margin.top, width, dx])
+      .style("font", "32px sans-serif") // font of the node text
+      .style("user-select", "none");
+
+    const gLink = svg.append("g")
+      .attr("fill", "none")
+      .attr("stroke", "#555") // color of line to node
+      .attr("stroke-opacity", 0.2) // opacity of line to node
+      .attr("stroke-width", 1.5); // width of line to node
+
+    const gNode = svg.append("g")
+      .attr("cursor", "pointer")
+      .attr("pointer-events", "all");
+
+    function update(source) {
+      const duration = d3.event && d3.event.altKey ? 2500 : 250;
+      const nodes = root.descendants().reverse();
+      const links = root.links();
+
+      // above defines the layout of tree, size, color, font etc.
+      
+      // below build tree using data and based on the above layout.      
+      tree(root);
+
+      let left = root;
+      let right = root;
+      root.eachBefore(node => {
+        if (node.x < left.x) left = node;
+        if (node.x > right.x) right = node;
+      });
+
+      const height = right.x - left.x + margin.top + margin.bottom;
+
+      const transition = svg.transition()
+        .duration(duration)
+        .attr("viewBox", [-margin.left, left.x - margin.top, width, height])
+        .tween("resize", window.ResizeObserver ? null : () => () => svg.dispatch("toggle"));
+
+      // Update the nodes…
+      const node = gNode.selectAll("g")
+        .data(nodes, d => d.id);
+
+      // Enter any new nodes at the parent's previous position.
+      const nodeEnter = node.enter().append("g")
+        .attr("transform", d => `translate(${source.y0},${source.x0})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0)
+        .on("click", (event, d) => {
+          d.children = d.children ? null : d._children;
+          update(d);
+        });
+
+      nodeEnter.append("circle")
+        .attr("r", 2.5) // radius of node
+        .attr("fill", d => d._children ? "#555" : "#999") // color of node, default 
+        .attr("stroke-width", 10);
+
+      nodeEnter.append("text")
+        .attr("dy", "0.31em") // y-position of text wrt node dot
+        .attr("x", d => d._children ? -6 : 6) // how much left or right of dot text should be
+        .attr("text-anchor", d => d._children ? "end" : "start")
+        .text(d => d.data.name)
+        .clone(true).lower()
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 3) // text outline width
+        .attr("stroke", "white"); // text outline, default white
+
+      // Transition nodes to their new position.
+      const nodeUpdate = node.merge(nodeEnter).transition(transition)
+        .attr("transform", d => `translate(${d.y},${d.x})`)
+        .attr("fill-opacity", 1)
+        .attr("stroke-opacity", 1);
+
+      // Transition exiting nodes to the parent's new position.
+      const nodeExit = node.exit().transition(transition).remove()
+        .attr("transform", d => `translate(${source.y},${source.x})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0);
+
+      // Update the links…
+      const link = gLink.selectAll("path")
+        .data(links, d => d.target.id);
+
+      // Enter any new links at the parent's previous position.
+      const linkEnter = link.enter().append("path")
+        .attr("d", d => {
+          const o = { x: source.x0, y: source.y0 };
+          return diagonal({ source: o, target: o });
+        });
+
+      // Transition links to their new position.
+      link.merge(linkEnter).transition(transition)
+        .attr("d", diagonal);
+
+      // Transition exiting nodes to the parent's new position.
+      link.exit().transition(transition).remove()
+        .attr("d", d => {
+          const o = { x: source.x, y: source.y };
+          return diagonal({ source: o, target: o });
+        });
+
+      // Stash the old positions for transition.
+      root.eachBefore(d => {
+        d.x0 = d.x;
+        d.y0 = d.y;
+      });
+    }
+
+    update(root);
+
+    //d3.select('#demo').append(svg);
+
+    $('#index').append(svg._groups[0][0])
+  </script>
+</body>
